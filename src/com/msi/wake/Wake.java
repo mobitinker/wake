@@ -26,6 +26,10 @@ import android.widget.TextView;
 public class Wake extends Activity {
 	
 	public static final String TAG = "Wake";
+	public static final String LOGNEW = "wakelog.txt";
+	public static final String LOGOLD = "wakelog.old";
+	public static final Integer LogSize = 3000;
+	
 	private Context m_Context;
 	
 	/** Called when the activity is first created. */
@@ -40,7 +44,7 @@ public class Wake extends Activity {
         btnSettings.setOnClickListener(new View.OnClickListener() {
         	@Override
         	public void onClick(View v) {
-    		    //startActivity(new Intent(this, EditPreferences.class));
+    		    startActivity(new Intent(Wake.this, EditPreferences.class));
         	}
         });
         final Button btnAirplane = (Button)this.findViewById(R.id.airplane);
@@ -60,6 +64,14 @@ public class Wake extends Activity {
         		AlarmReceiver.enableHotSpot(m_Context, !AlarmReceiver.isHotSpot(m_Context));
         	}
         });
+        final Button btnLog = (Button)this.findViewById(R.id.log);
+        btnLog.setOnClickListener(new View.OnClickListener() {
+        	@Override
+        	public void onClick(View v) {
+    		    startActivity(new Intent(Wake.this, ViewLog.class));
+        	}
+        });
+
     }
     
     @Override
@@ -85,6 +97,7 @@ public class Wake extends Activity {
     	super.onDestroy();
     }
 
+    /* TODO remove
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		new MenuInflater(this).inflate(R.menu.option, menu);
@@ -99,7 +112,8 @@ public class Wake extends Activity {
     	}
     	return(super.onOptionsItemSelected(item));
     }
-
+	*/
+    
     /**
      * Updates the main screen with current values
      */
@@ -149,18 +163,18 @@ public class Wake extends Activity {
     
 	/**
 	 * Log a message to file on sdcard. Keep wakelog.txt and wakelog.old. Moves .txt to .old once .txt is
-	 * longer than 100k.
+	 * longer than 10k.
 	 * @param msg
 	 */
 	public static void logger(String msg, Boolean toFile) {
 		// Note that messages logged to file on boot may fail since SD card may not be read
 		try {
 			if (toFile) {
-				File log = new File(Environment.getExternalStorageDirectory(), "wakelog.txt");
+				File log = new File(Environment.getExternalStorageDirectory(), LOGNEW);
 				try {
 					Long l = log.length();
-					if (l > 100000) {
-						File oldLog = new File(Environment.getExternalStorageDirectory(), "wakelog.old");
+					if (l > LogSize) {
+						File oldLog = new File(Environment.getExternalStorageDirectory(), LOGOLD);
 						if (oldLog.exists()) {
 							oldLog.delete();
 						}

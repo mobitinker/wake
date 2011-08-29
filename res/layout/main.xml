@@ -3,7 +3,8 @@
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 	<TextView android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:text="@string/welcome" />
+		android:layout_height="wrap_content" android:text="@string/welcome"
+		style="@style/FontExplain" />
 	<!-- -->
 	<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
@@ -13,64 +14,80 @@
 				android:layout_column="1" 
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="Enabled?" />
+				android:text="Enabled?"
+				style="@style/FontSettings" />
 			<TextView 
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="left" 
 				android:id="@+id/enabled"
-				android:text="" />
+				android:text=""
+				style="@style/FontSettings" />
 		</TableRow>
 		<TableRow>
 			<TextView 
 				android:layout_column="1" 
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="Test mode?" />
+				android:text="Test mode?"
+				style="@style/FontSettings" />
 			<TextView 
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="left" 
 				android:id="@+id/testMode"
-				android:text="" />
+				android:text="" 
+				style="@style/FontSettings" />
+				
 		</TableRow>
 		<TableRow>
 			<TextView 
 				android:layout_column="1" 
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="Daily wake time" />
+				android:text="Daily wake time"
+				style="@style/FontSettings" />
+				
 			<TextView 
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="left" 
 				android:id="@+id/wakeTime"
-				android:text="" />
+				android:text=""
+				style="@style/FontSettings" />
+
 		</TableRow>
 		<TableRow>
 			<TextView 
 				android:layout_column="1" 
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="Duration (secs)" />
+				android:text="Duration (secs)"
+				style="@style/FontSettings" />
 			<TextView 
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content" 
 				android:layout_gravity="left" 
 				android:id="@+id/duration"
-				android:text="" />
+				android:text=""
+				style="@style/FontSettings" />
+				
 		</TableRow>
 		<TableRow> <!-- spacer -->
 			<TextView 
 				android:layout_column="1" 
 				android:layout_width="wrap_content"
 				android:layout_height="18dip"
-				android:text="" />
+				android:text=""
+				style="@style/FontSettings" />
+				
 			<TextView 
 				android:layout_width="wrap_content"
 				android:layout_height="18dip" 
 				android:layout_gravity="left" 
-				android:text="" />
+				android:text=""
+				style="@style/FontSettings" />
+				
 		</TableRow>
 	</TableLayout>
 	<!-- -->
@@ -86,6 +103,9 @@
 			layout_weight="1" android_layout_marginRight="10dp"></Button>
 		<Button android:layout_height="wrap_content" android:text="@string/hotspot"
 			android:layout_width="wrap_content" android:id="@+id/hotspot"
+			layout_weight="1" android_layout_marginRight="10dp"></Button>
+		<Button android:layout_height="wrap_content" android:text="@string/log"
+			android:layout_width="wrap_content" android:id="@+id/log"
 			layout_weight="1"></Button>
 	</LinearLayout>
 </LinearLayout>

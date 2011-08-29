@@ -11,7 +11,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 
 public class EditPreferences extends PreferenceActivity {
-	SharedPreferences prefs = null;
+	private SharedPreferences prefs = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -37,8 +37,7 @@ public class EditPreferences extends PreferenceActivity {
 				String key) {
 			boolean enabled = prefs.getBoolean("wake_enabled", false);
 			if ("wake_enabled".equals(key)) {
-
-				//TODO Move to setAlarm?
+				//Keep app from being killed if wakeup is enabled. This has not been tested
 				int flag = (enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
 						: PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
 				ComponentName component = new ComponentName(EditPreferences.this, OnBootReceiver.class);

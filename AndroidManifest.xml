@@ -33,6 +33,8 @@
         </activity>
         <activity android:name=".EditPreferences">
 		</activity>
+        <activity android:name=".ViewLog">
+		</activity>
         
 		<!--receiver  android:process=":remote" android:name="AlarmReceiver"></receiver-->
 		<receiver  android:name="AlarmReceiver"></receiver>
