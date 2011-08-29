@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<TextView android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="@string/welcome" />
+	<!-- -->
+	<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:stretchColumns="1">
+		<TableRow>
+			<TextView 
+				android:layout_column="1" 
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Enabled?" />
+			<TextView 
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="left" 
+				android:id="@+id/enabled"
+				android:text="" />
+		</TableRow>
+		<TableRow>
+			<TextView 
+				android:layout_column="1" 
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Test mode?" />
+			<TextView 
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="left" 
+				android:id="@+id/testMode"
+				android:text="" />
+		</TableRow>
+		<TableRow>
+			<TextView 
+				android:layout_column="1" 
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Daily wake time" />
+			<TextView 
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="left" 
+				android:id="@+id/wakeTime"
+				android:text="" />
+		</TableRow>
+		<TableRow>
+			<TextView 
+				android:layout_column="1" 
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Duration (secs)" />
+			<TextView 
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" 
+				android:layout_gravity="left" 
+				android:id="@+id/duration"
+				android:text="" />
+		</TableRow>
+		<TableRow> <!-- spacer -->
+			<TextView 
+				android:layout_column="1" 
+				android:layout_width="wrap_content"
+				android:layout_height="18dip"
+				android:text="" />
+			<TextView 
+				android:layout_width="wrap_content"
+				android:layout_height="18dip" 
+				android:layout_gravity="left" 
+				android:text="" />
+		</TableRow>
+	</TableLayout>
+	<!-- -->
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="horizontal" android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+		<Button android:layout_height="wrap_content" android:text="@string/airplane"
+			android:layout_width="wrap_content" android:id="@+id/airplane"
+			layout_weight="1"></Button>
+		<Button android:layout_height="wrap_content" android:text="@string/hotspot"
+			android:layout_width="wrap_content" android:id="@+id/hotspot"
+			layout_weight="1"></Button>
+	</LinearLayout>
+</LinearLayout>

@@ -1,0 +1,20 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	<CheckBoxPreference android:key="wake_enabled"
+		android:title="Enable Hotspot Wakeup" 
+		android:summary="Hotspot will be enabled each day at time below" />
+	<CheckBoxPreference android:key="test_mode"
+		android:title="Test Mode" 
+		android:summary="Hotspot will be enabled for one minute every five starting in two"
+		android:dependency="wake_enabled" />
+	<com.msi.wake.TimePreference android:key="wake_time"
+		android:title="Wakeup Time" 
+		android:defaultValue="12:00"
+		android:summary="Set your desired time for wakeup"
+		android:dependency="wake_enabled" />
+	<EditTextPreference android:key="duration"
+		android:title="Wake Duration" 
+		android:summary="Duration in seconds for hotspot to be available" 
+		android:defaultValue="300"
+		android:inputType="number" 
+		android:dependency="wake_enabled" />
+</PreferenceScreen>
