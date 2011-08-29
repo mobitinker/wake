@@ -149,7 +149,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 				Settings.System.AIRPLANE_MODE_RADIOS);
 		
 		//This line is reporting all radios affected but annunciator does not seem to think so. Does not show airplane
-		Wake.logger("Airplane mode is: " + isAM + " changing to " + status + " For radios: " + radios, false);
+		Wake.logger("Airplane mode is: " + isAM + ". Changing to " + status + " for radios: " + radios, false);
 		
 		// It appears Airplane mode should only be toggled. Don't reset to
 		// current state.

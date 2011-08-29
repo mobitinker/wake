@@ -2,6 +2,7 @@
 <resources>
     <string name="welcome">Automatic wake up of hotspot mode. Use menu to change settings. Buttons below are for convenience during testing.\n\n</string>
     <string name="app_name">Wake</string>
+    <string name="settings">Settings</string>
     <string name="airplane">Airplane</string>
     <string name="hotspot">HotSpot</string>
 </resources>

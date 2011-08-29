@@ -4,28 +4,15 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Calendar;
 import java.util.Date;
 
 import com.msi.wake.R;
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
-import android.os.PowerManager;
-import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.util.Log;
@@ -35,16 +22,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Wake extends Activity {
 	
 	public static final String TAG = "Wake";
 	private Context m_Context;
 	
-
-    //BroadcastReceiver mScreenOffListener;
-
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +36,13 @@ public class Wake extends Activity {
         setContentView(R.layout.main);
         
         //Set buttons
+        final Button btnSettings = (Button)this.findViewById(R.id.settings);
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+        	@Override
+        	public void onClick(View v) {
+    		    //startActivity(new Intent(this, EditPreferences.class));
+        	}
+        });
         final Button btnAirplane = (Button)this.findViewById(R.id.airplane);
         btnAirplane.setOnClickListener(new View.OnClickListener() {
         	@Override
@@ -109,7 +99,10 @@ public class Wake extends Activity {
     	}
     	return(super.onOptionsItemSelected(item));
     }
-    
+
+    /**
+     * Updates the main screen with current values
+     */
     private void updateUI() {
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(m_Context);
@@ -160,32 +153,36 @@ public class Wake extends Activity {
 	 * @param msg
 	 */
 	public static void logger(String msg, Boolean toFile) {
-		/*
-		if (toFile) {
-			
-			File log = new File(Environment.getExternalStorageDirectory(), "wakelog.txt");
-			try {
-				Long l = log.length();
-				if (l > 100000) {
-					File oldLog = new File(Environment.getExternalStorageDirectory(), "wakelog.old");
-					if (oldLog.exists()) {
-						oldLog.delete();
+		// Note that messages logged to file on boot may fail since SD card may not be read
+		try {
+			if (toFile) {
+				File log = new File(Environment.getExternalStorageDirectory(), "wakelog.txt");
+				try {
+					Long l = log.length();
+					if (l > 100000) {
+						File oldLog = new File(Environment.getExternalStorageDirectory(), "wakelog.old");
+						if (oldLog.exists()) {
+							oldLog.delete();
+						}
+						log.renameTo(oldLog);
+						log.createNewFile();
 					}
-					log.renameTo(oldLog);
-					log.createNewFile();
+					String s;
+					//Write a message to /mnt/sdcard/wakelog.txt
+					BufferedWriter out = new BufferedWriter(new FileWriter(log.getAbsolutePath(), log.exists()));
+					s = new Date().toString() + ", " + msg + "\r\n";
+					out.write(s);
+					Log.i(TAG, s);
+					out.close();
+				} catch (IOException e) {
+					Log.e(TAG, "Exception appending to log file", e);
 				}
-				String s;
-				//write a message to /mnt/sdcard/wakelog.txt
-				BufferedWriter out = new BufferedWriter(new FileWriter(log.getAbsolutePath(), log.exists()));
-				s = new Date().toString() + ", " + msg + "\r\n";
-				out.write(s);
-				Log.i(TAG, s);
-				out.close();
-			} catch (IOException e) {
-				Log.e(TAG, "Exception appending to log file", e);
-			}
-		} 
-		*/
+			} 
+		}
+		catch (Exception e) {
+			Log.i(TAG, e.getMessage());
+			e.printStackTrace();
+		}
 		Log.i(TAG, msg);
 	}
 

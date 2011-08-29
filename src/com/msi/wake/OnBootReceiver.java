@@ -1,7 +1,6 @@
 package com.msi.wake;
 
 import java.util.Calendar;
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -10,31 +9,41 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
+/**
+ * Handles setting alarms and starting app on boot.
+ * @author Mark Murphy
+ *
+ */
 public class OnBootReceiver extends BroadcastReceiver {
 
+	/**
+	 * Sets alarms to awaken and go back to sleep, based on shared preferences
+	 * @param context
+	 */
 	public static void setAlarm(Context context) {
 		AlarmManager mgr = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
-		Calendar cal = Calendar.getInstance();
-		SharedPreferences prefs = PreferenceManager
-				.getDefaultSharedPreferences(context);
-		String time = prefs.getString("wake_time", "00:00");
-		cal.set(Calendar.HOUR_OF_DAY, TimePreference.getHour(time));
-		cal.set(Calendar.MINUTE, TimePreference.getMinute(time));
-		cal.set(Calendar.SECOND, 0);
-		cal.set(Calendar.MILLISECOND, 0);
-		//Set to tomorrow if needed
-		if (cal.getTimeInMillis() < System.currentTimeMillis()) {
-			cal.add(Calendar.DAY_OF_YEAR, 1);
-		}
+		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		
 		Boolean isTestMode = prefs.getBoolean("test_mode", false);
+		
 		Long wakeTime, sleepTime;
 		
 		if (!isTestMode) {
-				
+			//Normal case. Set alarm to occur at same time, every 24 hours
+			Calendar cal = Calendar.getInstance();
+			String time = prefs.getString("wake_time", "00:00");
+			cal.set(Calendar.HOUR_OF_DAY, TimePreference.getHour(time));
+			cal.set(Calendar.MINUTE, TimePreference.getMinute(time));
+			cal.set(Calendar.SECOND, 0);
+			cal.set(Calendar.MILLISECOND, 0);
+			//Set to tomorrow if needed
+			if (cal.getTimeInMillis() < System.currentTimeMillis()) {
+				cal.add(Calendar.DAY_OF_YEAR, 1);
+			}
+
 			//Set alarm to wake and turn on hotspot
 			wakeTime = cal.getTimeInMillis();
 			mgr.setRepeating(AlarmManager.RTC_WAKEUP, wakeTime,
@@ -49,7 +58,9 @@ public class OnBootReceiver extends BroadcastReceiver {
 			Wake.logger("Set alarms. Normal. Wake: " + wakeTime.toString() + " Sleep: " + sleepTime.toString(), true);
 		}
 		else
-		{			
+		{
+			//This is a testing set up with more frequent alarms. Not meant for typical use. May be removed
+			//some day.
 			//Set alarm to start in 2 min and continue every five minutes
 			wakeTime = System.currentTimeMillis() + 2 * 60 * 1000;
 			mgr.setRepeating(AlarmManager.RTC_WAKEUP, wakeTime,
@@ -63,6 +74,11 @@ public class OnBootReceiver extends BroadcastReceiver {
 		}
 	}
 
+	/**
+	 * Returns value of wake_enabled shared preference
+	 * @param context
+	 * @return
+	 */
 	public static Boolean wakeEnabled(Context context) {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		return prefs.getBoolean("wake_enabled", false);
@@ -79,6 +95,12 @@ public class OnBootReceiver extends BroadcastReceiver {
 		mgr.cancel(getPendingIntent(context, "Sleep"));
 	}
 
+	/**
+	 * Finds and returns pending intents. Used to cancel alarms 
+	 * @param context
+	 * @param data
+	 * @return
+	 */
 	public static PendingIntent getPendingIntent(Context context, String data) {
 		Intent i = new Intent(context, AlarmReceiver.class);
 		Uri u = Uri.parse(data);
@@ -88,6 +110,9 @@ public class OnBootReceiver extends BroadcastReceiver {
 	}
 
 	@Override
+	/**
+	 * Handler for device's boot message. Puts phone to sleep and starts main activity
+	 */
 	public void onReceive(Context context, Intent intent) {
 		try {
 			Wake.logger("Start up on boot", true);
@@ -98,17 +123,16 @@ public class OnBootReceiver extends BroadcastReceiver {
 
 				//Default to sleeping
 				AlarmReceiver.enableHotSpot(context, false);
-				AlarmReceiver.setAirplaneMode(context, false);
+				AlarmReceiver.setAirplaneMode(context, true);
 
 				//Start up app. Note: Android may shut it down later
-				Intent startupIntent = new Intent(context, Wake.class); // substitute with your launcher class
+				Intent startupIntent = new Intent(context, Wake.class); 
 				startupIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				context.startActivity(startupIntent);	
-
 			}
 		}
 		catch (Exception e) {
-			Wake.logger("Exception on boot: " + e.getMessage(), true);
+			Wake.logger("Exception on boot: " + e.getMessage(), false);
 		}
 	}
 }
