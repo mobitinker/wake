@@ -1,3 +1,19 @@
+What Is This?
+=============
+Wake is a simple Android application that will awaken a phone at the
+same time each day to make it be a wifi hotspot. The purpose is to allow
+nearby sensors, attached to water purification systems or other equipment,
+to upload their usage and maintenance data to a data collection host.
+Of course other interesting uses are possible too. Emphasis is on low 
+power consumption in remote areas without utilities.
+
+Please contact me with ideas for further improvement. mobitinker at gmail.
+
+Hats off to the heros at SWEETLab.org at Portland State University who
+suggested the idea!
+
+Mark Murphy, Portland, OR  USA
+
 Instructions
 ============
 Wake requires an Android device 2.2 or later that supports being a hotspot.
