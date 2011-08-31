@@ -92,20 +92,23 @@
 	</TableLayout>
 	<!-- -->
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:orientation="horizontal" android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-		android:layout_gravity="center_horizontal">
+		android:orientation="horizontal" android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal" android:layout_width="wrap_content">
 		<Button android:layout_height="wrap_content" android:text="@string/settings"
-			android:layout_width="wrap_content" android:id="@+id/settings"
+			android:layout_width="80dip" android:id="@+id/settings"
 			layout_weight="1" android_layout_marginRight="10dp"></Button>
 		<Button android:layout_height="wrap_content" android:text="@string/airplane"
-			android:layout_width="wrap_content" android:id="@+id/airplane"
+			android:layout_width="80dip" android:id="@+id/airplane"
 			layout_weight="1" android_layout_marginRight="10dp"></Button>
 		<Button android:layout_height="wrap_content" android:text="@string/hotspot"
-			android:layout_width="wrap_content" android:id="@+id/hotspot"
+			android:layout_width="80dip" android:id="@+id/hotspot"
 			layout_weight="1" android_layout_marginRight="10dp"></Button>
 		<Button android:layout_height="wrap_content" android:text="@string/log"
-			android:layout_width="wrap_content" android:id="@+id/log"
+			android:layout_width="80dip" android:id="@+id/log"
 			layout_weight="1"></Button>
 	</LinearLayout>
+
+	<TextView android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:text="@string/version_copyright" />
+	
 </LinearLayout>

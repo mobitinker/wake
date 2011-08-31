@@ -9,7 +9,6 @@ tmp/**/*
 Thumbs.db
 Desktop.ini
 *~
-*.apk
 bin
 gen
 local.properties

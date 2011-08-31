@@ -1,3 +1,4 @@
+//Copyright 2011 Murphy Software, Inc. All rights reserved. Under FreeBSD license.
 package com.msi.wake;
 
 import java.io.BufferedWriter;
@@ -16,9 +17,6 @@ import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -96,23 +94,6 @@ public class Wake extends Activity {
         logger("onDestroy", false);
     	super.onDestroy();
     }
-
-    /* TODO remove
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		new MenuInflater(this).inflate(R.menu.option, menu);
-		return (super.onCreateOptionsMenu(menu));
-	}
-    
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-    	if (item.getItemId()==R.id.prefs) {
-		    startActivity(new Intent(this, EditPreferences.class));
-		    return(true);
-    	}
-    	return(super.onOptionsItemSelected(item));
-    }
-	*/
     
     /**
      * Updates the main screen with current values
@@ -133,34 +114,7 @@ public class Wake extends Activity {
         t.setText(prefs.getString("duration", "300"));
     }
 
-    /* Example of setting wake lock. May be necessary if phone needs to wake to be hotspot
-    private Handler wakeUp = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-
-            super.handleMessage(msg);
-            // Wake up phone
-            Log.i(TAG, "Wake up the phone");
-            
-            //Above message fires but phone does not unlock nor redisplay screen. Must need to
-            //do something more below.
-            
-            PowerManager pm = (PowerManager) Wake.this.getSystemService(Context.POWER_SERVICE);
-            
-            // This may not do what we need
-            //long l = SystemClock.uptimeMillis();
-            //pm(l, false);	//false will bring the screen back as bright as it was, true - will dim it
-            //
-            
-            //This also does not seem to work to bring back screen
-            PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, TAG);
-            wl.acquire();
-            //wl.release();
-          
-        }
-    };
-    */
-    
+        
 	/**
 	 * Log a message to file on sdcard. Keep wakelog.txt and wakelog.old. Moves .txt to .old once .txt is
 	 * longer than 10k.

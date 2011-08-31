@@ -49,7 +49,12 @@ public class EditPreferences extends PreferenceActivity {
 			if (enabled) {
 				//Schedule alarm with new settings
 				OnBootReceiver.setAlarm(EditPreferences.this);
-			}
+			} 
+			//Put device in airplane mode if Wake is enabled
+			AlarmReceiver.enableHotSpot(EditPreferences.this, false);
+			AlarmReceiver.setAirplaneMode(EditPreferences.this, enabled);
+			
+			Wake.logger("Wake " + (enabled ? "enabled" : "disabled") + " in settings", true);
 		}
 	};
 }

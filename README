@@ -1,0 +1,55 @@
+Instructions
+============
+Wake requires an Android device 2.2 or later that supports being a hotspot.
+
+Wake runs at boot. If you don't want your phone being set in airplane mode 
+most of the time, uninstall Wake or disable it. 
+
+After install, the default setting is to be disabled. Use the settings to 
+enable/disable and to set the daily wake time and duration. 
+At appointed times, the program sets airplane mode off and turns the hotspot on.
+
+If enabled and in test mode, Wake will turn on hotspot after two minutes and every five 
+minutes thereafter. It will return to airplane mode after 60 seconds. This behavior 
+occurs regardless of other settings and is purely for convenient testing.
+
+The log will show start up and each wake and sleep event. The log shows the last
+4kb of entries.
+
+To conserve power, turn off vibrate, set screen timeout as low as possible plus any 
+other settings recommended.
+
+Warranty
+========
+
+Murphy Software provides no warranty and has no liability for the use of this software.
+Please test for your application first.
+
+License (FreeBSD)
+=================
+
+Copyright 2011 Murphy Software, Inc. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are
+permitted provided that the following conditions are met:
+
+   1. Redistributions of source code must retain the above copyright notice, this list of
+      conditions and the following disclaimer.
+
+   2. Redistributions in binary form must reproduce the above copyright notice, this list
+      of conditions and the following disclaimer in the documentation and/or other materials
+      provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY <COPYRIGHT HOLDER> ''AS IS'' AND ANY EXPRESS OR IMPLIED
+WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+The views and conclusions contained in the software and documentation are those of the
+authors and should not be interpreted as representing official policies, either expressed
+or implied, of <copyright holder>.
